@@ -1,0 +1,74 @@
+<html ng-app="store">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <script src="app.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="StoreController as store">
+
+        <div class="container-fluid">
+
+            <div ng-repeat="product in store.products" class="row">
+
+                <div ng-hide="product.soldOut" class="card col-sm-12 col-md-4 col-lg-3">
+
+                    <div class="card-body">
+                        <img class="card-img-top" ng-src="{{product.images[0]}}" alt="Card image cap">
+                        <h4 class="card-title">{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h4>
+                        
+                        <p class="card-text"></p>
+
+                        <br>
+                        <a ng-show="product.canPurchase" href="#" class="btn btn-primary">Add to cart</a>
+
+                        <br>
+                        <br>
+                        <section ng-controller="TabController as tab" class="tab">
+                            <ul class="nav nav-pills">
+                                <li ng-class="{active: tab.isSet(1)}">
+                                    <a ng-click="tab.setTab(1)" href>Description</a></li>
+
+                                <li ng-class="{active: tab.isSet(2)}">
+                                    <a ng-click="tab.setTab(2)" href>Specs</a></li>
+
+                                <li ng-class="{active: tab.isSet(3)}">
+                                    <a ng-click="tab.setTab(3)" href>Reviews</a></li>
+                            </ul>
+
+                            <div ng-show="tab.isSet(1)">
+                                <h4>Description</h4>
+                                <blockquote>{{product.description}}</blockquote>
+                            </div>
+                            <div ng-show="tab.isSet(2)">
+                                <h4>Specs</h4>
+                                <blockquote>Shine: {{product.shine}}</blockquote>
+                            </div>
+                            <div ng-show="tab.isSet(3)">
+                                <h4>Reviews</h4>
+                                <blockquote></blockquote>
+                            </div>
+                        </section>
+
+                        <hr>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+
+</html>
