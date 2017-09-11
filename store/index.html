@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <img class="card-img-top" ng-src="{{product.images[0]}}" alt="Card image cap">
                         <h4 class="card-title">{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h4>
-                        
+
                         <p class="card-text"></p>
 
                         <br>
@@ -52,8 +52,34 @@
                             </div>
                             <div ng-show="tab.isSet(3)">
                                 <h4>Reviews</h4>
-                                <blockquote></blockquote>
+                                <blockquote ng-repeat="review in product.reviews">
+                                    <b>Stars: {{review.stars}}</b> {{review.body}}
+                                    <cite>by: {{review.author}}</cite>
+                                </blockquote>
+
+                                <form name="reviewForm" action="">
+
+                                    <blockquote>
+                                        <b>Stars: {{review.stars}}</b> {{review.body}}
+                                        <cite>by: {{review.author}}</cite>
+                                    </blockquote>
+
+                                    <select ng-model="review.stars">
+                                        <option value="1">1 star</option>
+                                        <option value="2">2 stars</option>
+                                    </select>
+
+                                    <textarea ng-model="review.body"></textarea>
+
+                                    <label>by:</label>
+                                    <input type="email" ng-model="review.author" />
+                                    <input type="submit" value="Submit" />
+
+                                </form>
                             </div>
+
+
+
                         </section>
 
                         <hr>
